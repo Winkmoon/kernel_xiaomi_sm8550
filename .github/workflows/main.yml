@@ -84,7 +84,7 @@ jobs:
           sudo rm -rf ./llvm.sh
           sudo wget https://apt.llvm.org/llvm.sh
           sudo chmod +x llvm.sh
-          sudo sudo ./llvm.sh 20 all
+          sudo sudo ./llvm.sh 18 all
 
       - name: 初始化源码仓库
         run: |
@@ -270,11 +270,12 @@ jobs:
       - name: 构建内核
         run: |
           cd kernel_workspace/common
-          sudo apt-get update
-          sudo apt-get install -y llvm clang lld llvm-ar
           export KBUILD_BUILD_HOST=Xinran
           export KBUILD_BUILD_USER=LOVE_Bai
-          make -j$(nproc --all) LLVM=-20 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnuabeihf- CC=clang LD=ld.lld HOSTCC=clang HOSTLD=ld.lld O=out KCFLAGS+=-Wno-error gki_defconfig all
+          sudo ln -s /usr/bin/llvm-ar-18 /usr/bin/llvm-ar
+          sudo ln -s /usr/bin/clang-18 /usr/bin/clang
+          sudo ln -s /usr/bin/clang++-18 /usr/bin/clang++
+          make -j$(nproc --all) LLVM=-18 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnuabeihf- CC=clang LD=ld.lld HOSTCC=clang HOSTLD=ld.lld O=out KCFLAGS+=-Wno-error gki_defconfig all
           echo "内核编译完成！"
          
           
