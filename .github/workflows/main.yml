@@ -273,8 +273,8 @@ jobs:
           export KBUILD_BUILD_HOST=Xinran
           export KBUILD_BUILD_USER=LOVE_Bai
           sudo ln -s /usr/bin/llvm-ar-18 /usr/bin/llvm-ar
-          sudo ln -s /usr/bin/clang-18 /usr/bin/clang
-          sudo ln -s /usr/bin/clang++-18 /usr/bin/clang++
+          #sudo ln -s /usr/bin/clang-18 /usr/bin/clang
+          #sudo ln -s /usr/bin/clang++-18 /usr/bin/clang++
           make -j$(nproc --all) LLVM=-18 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnuabeihf- CC=clang LD=ld.lld HOSTCC=clang HOSTLD=ld.lld O=out KCFLAGS+=-Wno-error gki_defconfig all
           echo "内核编译完成！"
          
