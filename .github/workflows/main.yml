@@ -269,14 +269,9 @@ jobs:
            
       - name: 构建内核
         run: |
-          cd kernel_workspace
-          if [[ ${{ github.event.inputs.scx_enable }} == "true" ]]; then
-            git clone https://github.com/cctv18/sched_ext.git
-            rm -rf ./sched_ext/.git
-            rm -rf ./sched_ext/README.md
-            cp -r ./sched_ext/* ./common/kernel/sched
-          fi
-          cd common
+          cd kernel_workspace/common
+          export KBUILD_BUILD_HOST=Xinran
+          export KBUILD_BUILD_USER=LOVE_Bai
           make -j$(nproc --all) LLVM=-20 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnuabeihf- CC=clang LD=ld.lld HOSTCC=clang HOSTLD=ld.lld O=out KCFLAGS+=-Wno-error gki_defconfig all
           echo "内核编译完成！"
          
@@ -284,7 +279,7 @@ jobs:
       - name: 克隆 AnyKernel3 并打包
         run: |
           cd kernel_workspace
-          git clone https://github.com/cctv18/AnyKernel3 --depth=1
+          git clone https://github.com/Winkmoon/AnyKernel3 --depth=1
           rm -rf ./AnyKernel3/.git
           cd AnyKernel3
           cp ../common/out/arch/arm64/boot/Image ./Image
