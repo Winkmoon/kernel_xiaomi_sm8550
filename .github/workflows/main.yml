@@ -118,7 +118,7 @@ jobs:
           cd kernel_workspace
           git clone https://github.com/ShirkNeko/susfs4ksu.git -b gki-android13-5.15
           git clone https://github.com/ShirkNeko/SukiSU_patch.git
-          cp ./susfs4ksu/kernel_patches/50_add_susfs_in_gki-gki-android13-5.15.patch ./common/
+          cp ./susfs4ksu/kernel_patches/50_add_susfs_in_gki-android13-5.15.patch ./common/
           cp ./susfs4ksu/kernel_patches/fs/* ./common/fs/
           cp ./susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
           cp ./SukiSU_patch/hooks/syscall_hooks.patch ./common/
