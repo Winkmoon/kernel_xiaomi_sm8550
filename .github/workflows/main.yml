@@ -274,6 +274,15 @@ jobs:
           export KBUILD_BUILD_HOST=Bai
           #make LLVM=1 LLVM_IAS=1 ARCH=arm64 CC="ccache clang" HOSTCC="ccache clang" HOSTCXX="ccache clang++" PYTHON=python3 O=out gki_defconfig
           #make LLVM=1 LLVM_IAS=1 ARCH=arm64 CC="ccache clang" HOSTCC="ccache clang" HOSTCXX="ccache clang++" PYTHON=python3 O=out KCFLAGS=-Wno-error -j$(nproc --all)
+          
+          for tool in clang clang++ llvm-ar llvm-nm llvm-objcopy llvm-objdump llvm-strip ld.lld; do
+          sudo ln -sf /usr/bin/${tool}-19 /usr/bin/${tool}
+          done
+          
+          clang --version | head -n1
+          llvm-ar --version | head -n1
+          ld.lld --version | head -n1
+          
           make -j$(nproc --all) LLVM=-19 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnuabeihf- CC=clang LD=ld.lld HOSTCC=clang HOSTLD=ld.bfd O=out KCFLAGS+=-Wno-error gki_defconfig all
           echo "内核编译完成！"
          
